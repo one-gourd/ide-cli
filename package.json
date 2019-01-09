@@ -1,0 +1,22 @@
+{
+  "name": "ide-component-cli",
+  "version": "0.1.0",
+  "description": "ide cli for component generator",
+  "main": "src/index.js",
+  "bin": {
+    "ide-cli": "src/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"ide-switch-panelrror: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ide-switch-panel0.1.0xxx",
+  "dependencies": {
+    "caporal": "^1.1.0",
+    "colors": "^1.3.3",
+    "debug": "^4.1.1",
+    "git-clone": "^0.1.0",
+    "prompt": "^1.0.0",
+    "shelljs": "^0.8.3"
+  }
+}
