@@ -7,7 +7,7 @@
     "ide-cli": "src/cli.js"
   },
   "scripts": {
-    "test": "echo \"ide-switch-panelrror: no test specified\" && exit 1"
+    "release": "npx standard-version"
   },
   "author": "",
   "license": "ide-switch-panel0.1.0xxx",
