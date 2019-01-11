@@ -1,6 +1,6 @@
 {
   "name": "ide-component-cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ide cli for component generator",
   "main": "src/index.js",
   "bin": {
