@@ -138,14 +138,29 @@ function replaceFiles(targetDirection, configs, logger) {
       });
       if (peerList.length) {
         const peerStr = peerList.join(' ');
-        debugMini(`\n STEP 3: [PEERLIST] ====> ${peerStr}`);
+        const PEERLIST_VAR = 'peerList';
+        debugMini(
+          `\n STEP 3: [${PEERLIST_VAR.toUpperCase()}] ====> ${peerStr}`
+        );
 
+        replaceMap[PEERLIST_VAR] = {
+          regexp: new RegExp(
+            escapeRegex(`[${PEERLIST_VAR.toUpperCase()}]`),
+            'g'
+          ),
+          replacement: peerStr
+        };
         shell.ls('-Rl').forEach(entry => {
           if (entry.isFile()) {
             // debugMini(`>>> 替换 ${entry.name} 文件内容 <<<`);
             // Replace '[VARIABLE]` with the corresponding variable value from the prompt
             variables.forEach(variable => {
-              shell.sed('-i', `\\[PEERLIST\\]`, peerStr, entry.name);
+              shell.sed(
+                '-i',
+                replaceMap[PEERLIST_VAR].regexp,
+                replaceMap[PEERLIST_VAR].replacement,
+                entry.name
+              );
             });
           }
         });

@@ -7,9 +7,9 @@ const creatDirectory = require('./actions/create-directory');
 // bar.tick();};
 
 program
-  .version('0.1.0')
+  .version('0.1.2')
   .description('ide 命令行工具集')
-  .command('create', 'create - 创建新的 ide 组件')
+  .command('create', 'create - 创建新的 ide 模块')
   .argument('<jsonfile>', 'config json file - json 格式的配置文件')
   .option('-l, --local', 'not git clone repository - 不从远程拉取仓库（方便本地调试）')
   .action(creatDirectory);
