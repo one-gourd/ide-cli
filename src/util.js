@@ -84,12 +84,16 @@ function mkdirSyncOrNone(filepath) {
     }
   }
 }
+function escapeRegex(s) {
+  return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+};
 
 module.exports = {
   readFileOrEmpty,
   writeFileOrNone,
   isExistFile,
   parseOrFalse,
+  escapeRegex,
   mkdirSyncOrNone,
     invariant
 };
