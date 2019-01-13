@@ -38,6 +38,11 @@ module.exports = [
   'version',
 
   /**
+   * git 仓库地址
+   */
+  'repo',
+
+  /**
    * npm description
    *
    */
