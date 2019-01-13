@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.3"></a>
+## [0.1.3](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.1.2...v0.1.3) (2019-01-13)
+
+
+### Features
+
+* **新增字段:** 新增 repo 字段 ([deacf86](https://github.com/alibaba-paimai-frontend/ide-cli/commit/deacf86))
+
+
+
 <a name="0.1.2"></a>
 ## [0.1.2](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.1.1...v0.1.2) (2019-01-11)
 
