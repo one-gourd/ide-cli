@@ -106,7 +106,7 @@ function replaceFiles(targetDirection, configs, logger) {
 
   debugMini(`\n>>> STEP 2: 文件内容替换映射表： <<<`);
 
-  shell.ls('-Rl').forEach(entry => {
+  shell.ls('-Ral').forEach(entry => {
     if (entry.isFile()) {
       // Replace '[VARIABLE]` with the corresponding variable value from the prompt
       debugMini(`>>>替换 ${entry.name} 文件内容 <<<`);
