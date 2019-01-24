@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.4"></a>
+## [0.1.4](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.1.3...v0.1.4) (2019-01-24)
+
+
+### Features
+
+* **功能扩展:** 支持以 . 开始的文件夹内部的文件搜索替换 ([6d624dd](https://github.com/alibaba-paimai-frontend/ide-cli/commit/6d624dd))
+
+
+
 <a name="0.1.3"></a>
 ## [0.1.3](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.1.2...v0.1.3) (2019-01-13)
 
