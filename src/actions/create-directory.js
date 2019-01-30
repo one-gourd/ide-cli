@@ -91,7 +91,7 @@ function replaceFiles(targetDirection, configs, logger) {
     };
   });
 
-  debugMini(`\n>>> STEP 1: 重命名文件(夹) <<<`);
+  console.log(`\n>>> STEP 1: 重命名文件(夹) <<<`);
   // replace folder or file name
   ['name', 'className', 'version'].forEach(variable => {
     shell.exec(
@@ -104,7 +104,7 @@ function replaceFiles(targetDirection, configs, logger) {
     );
   });
 
-  debugMini(`\n>>> STEP 2: 文件内容替换映射表： <<<`);
+  console.log(`\n>>> STEP 2: 文件内容替换映射表： <<<`);
 
   shell.ls('-Ral').forEach(entry => {
     if (entry.isFile()) {
@@ -136,12 +136,19 @@ function replaceFiles(targetDirection, configs, logger) {
       const peerList = Object.keys(peerObject).map(name => {
         return `${name}@${peerObject[name]}`;
       });
+
+      const shouldExternalEditor = !!peerObject['ide-code-editor'];
+
       if (peerList.length) {
         const peerStr = peerList.join(' ');
         const PEERLIST_VAR = 'peerList';
-        debugMini(
+        console.log(
           `\n STEP 3: [${PEERLIST_VAR.toUpperCase()}] ====> ${peerStr}`
         );
+
+        if (shouldExternalEditor) {
+          console.log(`\n 因有 ide-code-editor 依赖，处理相应 html 标签`);
+        }
 
         replaceMap[PEERLIST_VAR] = {
           regexp: new RegExp(
@@ -150,7 +157,7 @@ function replaceFiles(targetDirection, configs, logger) {
           ),
           replacement: peerStr
         };
-        shell.ls('-Rl').forEach(entry => {
+        shell.ls('-Ral').forEach(entry => {
           if (entry.isFile()) {
             // debugMini(`>>> 替换 ${entry.name} 文件内容 <<<`);
             // Replace '[VARIABLE]` with the corresponding variable value from the prompt
@@ -162,6 +169,23 @@ function replaceFiles(targetDirection, configs, logger) {
                 entry.name
               );
             });
+
+            /**
+             * 针对 ide-code-editor 的 externals，需要对 [EDITOR_START] 或 [EDITOR_END] 做特殊操作
+             */
+            if (shouldExternalEditor) {
+              shell.exec(
+                `sed -i '/${escapeRegex('([EDITOR_START]|[EDITOR_END])')}/ d' ${
+                  entry.name
+                }`
+              );
+            } else {
+              shell.exec(
+                `sed -i '/${escapeRegex('[EDITOR_START]')}/, /${escapeRegex(
+                  '[EDITOR_END]'
+                )}/ d' ${entry.name}`
+              );
+            }
           }
         });
       }
