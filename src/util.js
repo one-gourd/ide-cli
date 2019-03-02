@@ -88,6 +88,10 @@ function escapeRegex(s) {
   return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 };
 
+function isTrue(val) {
+  return val === 'true' || val === true;
+}
+
 module.exports = {
   readFileOrEmpty,
   writeFileOrNone,
@@ -95,5 +99,6 @@ module.exports = {
   parseOrFalse,
   escapeRegex,
   mkdirSyncOrNone,
-    invariant
+    invariant,
+  isTrue
 };

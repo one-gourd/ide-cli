@@ -6,7 +6,8 @@ const {
   parseOrFalse,
   invariant,
   escapeRegex,
-  isExistFile
+  isExistFile,
+  isTrue
 } = require('../util');
 const variables = require('./_variables');
 const shell = require('shelljs');
@@ -122,6 +123,11 @@ function replaceFiles(targetDirection, configs, logger) {
       // This one is just to replace[YEAR] occurrences with the current year.Useful for LICENSE or README.md files.
       // Insert current year in files
       shell.sed('-i', '\\[YEAR\\]', new Date().getFullYear(), entry.name);
+
+      /**
+       * 针对有子组件的情况，需要对 [SUBCOMP_START] 或 [SUBCOMP_END] 做特殊操作
+       */
+      removeBlockOrNot(entry.name, 'SUBCOMP', !isTrue(configs.hasSubComponents));
     }
   });
 
@@ -173,25 +179,38 @@ function replaceFiles(targetDirection, configs, logger) {
             /**
              * 针对 ide-code-editor 的 externals，需要对 [EDITOR_START] 或 [EDITOR_END] 做特殊操作
              */
-            if (shouldExternalEditor) {
-              shell.exec(
-                `sed -i '/${escapeRegex('([EDITOR_START]|[EDITOR_END])')}/ d' ${
-                  entry.name
-                }`
-              );
-            } else {
-              shell.exec(
-                `sed -i '/${escapeRegex('[EDITOR_START]')}/, /${escapeRegex(
-                  '[EDITOR_END]'
-                )}/ d' ${entry.name}`
-              );
-            }
+            removeBlockOrNot(entry.name, 'EDITOR', !shouldExternalEditor);
           }
         });
       }
     }
   }
   // =============
+}
+
+/**
+ * 通过 tag 来整体删除或保留
+ *
+ * @param {*} filepath
+ * @param {*} tag
+ * @param {*} shouldRemoveBlock
+ */
+function removeBlockOrNot(filepath, tag, shouldRemoveBlock) {
+  if(!filepath || !tag) return;
+  if (shouldRemoveBlock) {
+    shell.exec(
+      `sed -i '/${escapeRegex(`[${tag}_START]`)}/, /${escapeRegex(
+        `[${tag}_END]`
+      )}/ d' ${filepath}`
+    );
+  } else {
+      shell.exec(
+        `sed -i '/${escapeRegex(`([${tag}_START]|[${tag}_END])`)}/ d' ${
+        filepath
+        }`
+      );
+
+  }
 }
 
 module.exports = (args, options, logger) => {
