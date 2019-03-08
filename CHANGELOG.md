@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.5"></a>
+## [0.1.5](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.1.4...v0.1.5) (2019-03-08)
+
+
+### Features
+
+* **功能完善:** 新增对 [EDITOR_START] [EDITOR_END] 范围的支持和替换 ([bfd401b](https://github.com/alibaba-paimai-frontend/ide-cli/commit/bfd401b))
+* **功能完善:** 新增对子组件代码块的控制 ([29dc443](https://github.com/alibaba-paimai-frontend/ide-cli/commit/29dc443))
+
+
+
 <a name="0.1.4"></a>
 ## [0.1.4](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.1.3...v0.1.4) (2019-01-24)
 
