@@ -43,6 +43,11 @@ module.exports = [
   'repo',
 
   /**
+   * gh-pages 对应的 homepage
+   */
+  'homepage',
+
+  /**
    * npm description
    *
    */
