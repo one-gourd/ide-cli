@@ -1,16 +1,13 @@
 {
-    "name": "ide-switch-panel",
-    "debugName": "switch-panel",
-    "className": "SwitchPanel",
-    "idPrefix": "ssp",
-    "version": "0.1.0",
-    "description": "xxx",
-    "author": "boycgit",
-    "libName": "ideSwitchPanel",
-    "externals": [
-        {
-            "styled-components": "4.x"
-        },
-        "ide-code-editor"
-    ]
+  "name": "ide-switch-panel",
+  "debugName": "switch-panel",
+  "className": "SwitchPanel",
+  "repo": "https://github.com/alibaba-paimai-frontend/ide-switch-panel.git",
+  "homepage": "https://alibaba-paimai-frontend.github.io/ide-switch-panel",
+  "idPrefix": "ssp",
+  "version": "0.1.0",
+  "description": "switch panel of ide",
+  "author": "boycgit",
+  "libName": "ideSwitchPanel",
+  "externals": ["ide-code-editor"]
 }

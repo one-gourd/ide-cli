@@ -44,26 +44,25 @@ ide-cli 0.1.0 - ide 命令行工具集
     "name": "ide-switch-panel",
     "debugName": "switch-panel",
     "className": "SwitchPanel",
+    "repo": "https://github.com/alibaba-paimai-frontend/ide-switch-panel.git",
+    "homepage": "https://alibaba-paimai-frontend.github.io/ide-switch-panel",
     "idPrefix": "ssp",
     "version": "0.1.0",
-    "description": "xxx",
+    "description": "switch panel of ide",
     "author": "boycgit",
     "libName": "ideSwitchPanel",
     "externals": [
-        {
-            "styled-components": "4.x"
-        },
         "ide-code-editor"
     ]
 }
 ```
+> 注意：所有字段是区分大小写的，所以不要把 `className` 写成 `classname`
 
 然后执行以下命令：
 
 ```shell
-ide-cli create config.json
+DEBUG=cli:* ide-cli create config.json
 ```
-
 就能获得名为 `ide-switch-panel` 模块的脚手架了文件，就可以在此基础上进行开发。
 
 ## 配置文件说明
@@ -77,7 +76,6 @@ ide-cli create config.json
  - `debugName`: 用于 debug 的标识符，方便 debug 的，不要为空就可以
  - `libName`: 用于 umd webpack 的打包配置中的 `library` 字段，通常用在别人引用你的组件且 externals 时，就会用上该字段；
 
-> 注意：所有字段是区分大小写的，所以不要把 `className` 写成 `classname`
 
 
 
