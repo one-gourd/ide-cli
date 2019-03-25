@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.6"></a>
+## [0.1.6](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.1.5...v0.1.6) (2019-03-25)
+
+
+### Features
+
+* **功能新增: 字段:** 新增 homepage 字段，配合 gh-pages 页面 demo 的展示 ([9bde0ae](https://github.com/alibaba-paimai-frontend/ide-cli/commit/9bde0ae))
+
+
+
 <a name="0.1.5"></a>
 ## [0.1.5](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.1.4...v0.1.5) (2019-03-08)
 
