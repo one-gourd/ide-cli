@@ -248,6 +248,6 @@ module.exports = (args, options, logger) => {
   } else {
     cloneRepo(configs.name, () => {
       replaceFiles(targetDirection, configs, logger);
-    });
+    }, configs.templater);
   }
 };
