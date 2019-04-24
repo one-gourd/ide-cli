@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.1.7](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.1.6...v0.1.7) (2019-04-24)
+
+
+### Features
+
+* **功能新增: 多模板功能:** 默认使用 use-engine 模板 ([7884ff9](https://github.com/alibaba-paimai-frontend/ide-cli/commit/7884ff9))
+* 🎸 功能完善: 帮助文档 ([834e72c](https://github.com/alibaba-paimai-frontend/ide-cli/commit/834e72c))
+
+
+
 <a name="0.1.6"></a>
 ## [0.1.6](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.1.5...v0.1.6) (2019-03-25)
 
