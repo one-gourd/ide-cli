@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [0.2.0](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.1.7...v0.2.0) (2019-07-07)
+
+
+### Features
+
+* 🎸 功能更改: 采用 react-scripts 方式重构组件; ([390de17](https://github.com/alibaba-paimai-frontend/ide-cli/commit/390de17))
+
+
+
 ## [0.1.7](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.1.6...v0.1.7) (2019-04-24)
 
 
