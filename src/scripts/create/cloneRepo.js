@@ -1,11 +1,11 @@
 const clone = require('git-clone');
-const { invariant } = require('./util');
-const { debugMini } = require('./debug');
+const { invariant } = require('../../lib/util');
+const { debugMini } = require('../../lib/debug');
 
 // const TPL_REPO_URL =
-// 'https://github.com/alibaba-paimai-frontend/ide-tpl-component.git';
+// 'https://github.com/one-gourd/ide-tpl-component-use-engine.git';
 const TPL_REPO_URL =
-  'https://github.com/alibaba-paimai-frontend/ide-tpl-component-use-engine.git';
+  'https://github.com/one-gourd/ide-tpl-component-neatly.git';
 
 /**
  * 从远程拉取模板代码

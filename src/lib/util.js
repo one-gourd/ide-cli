@@ -99,6 +99,6 @@ module.exports = {
   parseOrFalse,
   escapeRegex,
   mkdirSyncOrNone,
-    invariant,
+  invariant,
   isTrue
 };

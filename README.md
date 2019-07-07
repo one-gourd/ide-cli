@@ -46,6 +46,7 @@ ide-cli 0.1.0 - ide 命令行工具集
     "className": "SwitchPanel",
     "repo": "https://github.com/alibaba-paimai-frontend/ide-switch-panel.git",
     "homepage": "https://alibaba-paimai-frontend.github.io/ide-switch-panel",
+    "templater": "https://github.com/one-gourd/ide-tpl-component-neatly.git",
     "idPrefix": "ssp",
     "version": "0.1.0",
     "description": "switch panel of ide",
