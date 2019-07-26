@@ -11,7 +11,8 @@ const program = require('caporal');
 const spawn = require('react-dev-utils/crossSpawn');
 
 const path = require('path');
-const { readFileOrEmpty, parseOrFalse } = require('./lib/util');
+const { readFileOrEmpty, parseOrFalse, applyConfig } = require('./lib/util');
+const installConfig = require('./scripts/install/config');
 
 const pkgFile = path.join(__dirname, '../package.json');
 const pkgJson = parseOrFalse(readFileOrEmpty(pkgFile));
@@ -75,10 +76,6 @@ program
     'not git clone repository - 不从远程拉取仓库（方便本地调试）'
   )
   .action(actionCreate)
-  .command('install', 'Install dependencies & devDependencies - 安装依赖')
-  .action(() => {
-    spawnCommand('install');
-  })
   .command('dev', 'Start developing - 本地调试开发')
   .option('-p, --port', 'custom port - 指定调试服务器的端口（默认是 9000）')
   .action(() => {
@@ -88,5 +85,9 @@ program
   .action(() => {
     spawnCommand('build');
   });
+
+applyConfig(program, installConfig).action(() => {
+  spawnCommand('install');
+});
 
 program.parse(process.argv);

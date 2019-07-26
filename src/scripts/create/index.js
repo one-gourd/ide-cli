@@ -98,7 +98,7 @@ function replaceFiles(targetDirection, configs, logger) {
         shell.exec(
             `${path.join(
                 __dirname,
-                '../..'
+                '../../..'
             )}/node_modules/.bin/renamer -v --find "[${variable.toUpperCase()}]" --replace "${
             replaceMap[variable].replacement
             }" "**" | awk '/✔︎/'`

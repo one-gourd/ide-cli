@@ -2,12 +2,8 @@ const fs = require('fs');
 const { debug, debugMini, debugError, debugExtra } = require('./debug');
 
 function invariant(check, message, logger = console) {
-
   if (!check) {
-    logger.error(
-      '[ide-cli] Invariant failed: ' +
-        message
-    );
+    logger.error('[ide-cli] Invariant failed: ' + message);
     process.exit(1);
   }
 }
@@ -86,13 +82,41 @@ function mkdirSyncOrNone(filepath) {
 }
 function escapeRegex(s) {
   return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-};
+}
 
 function isTrue(val) {
   return val === 'true' || val === true;
 }
 
+/**
+ * 通过配置文件给命令行工具添加选项
+ */
+const defaultCliKeys = ['option', 'argument', 'command'];
+function applyConfig(program, cliConfig, excludes = []) {
+  const excludeKeys = [].concat(excludes);
+  Object.keys(cliConfig).forEach(configKey => {
+    // 对配置项做差集
+    if (
+      !!~defaultCliKeys.indexOf(configKey) &&
+      !~excludeKeys.indexOf(configKey)
+    ) {
+      const configs = [].concat(cliConfig[configKey]);
+      // 兼容一维数组情况，如果是字符串
+      if (typeof configs[0] === 'string') {
+        program = program[configKey](...configs);
+      } else {
+        // 如果是二维数组，多种配置情况下，需要循环拆解
+        configs.forEach(config => {
+          program = program[configKey](...config);
+        });
+      }
+    }
+  });
+  return program;
+}
+
 module.exports = {
+  applyConfig,
   readFileOrEmpty,
   writeFileOrNone,
   isExistFile,
