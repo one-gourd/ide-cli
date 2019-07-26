@@ -51,7 +51,9 @@ function installPeers(args, options, logger) {
     let peerInstallOptions = packageContents.peerInstallOptions;
     peerInstallOptions['save'] = false;
 
-    const result = spawn.sync(installer, ['install', packages.join(' ')], {
+    console.log(chalk.green(`install peers: ${packages.join(' ')}`));
+
+    const result = spawn.sync(installer, ['install'].concat(packages), {
       stdio: 'inherit'
     });
     process.exit(result.status);
