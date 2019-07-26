@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.1](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.2.0...v0.2.1) (2019-07-26)
+
+
+### Features
+
+* 🎸 功能新增: install 方法安装 peers 依赖 ([ab3c260](https://github.com/alibaba-paimai-frontend/ide-cli/commit/ab3c260))
+
+
+
 # [0.2.0](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.1.7...v0.2.0) (2019-07-07)
 
 
