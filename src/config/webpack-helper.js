@@ -1,6 +1,7 @@
 const paths = require('./paths');
 
 const { proxyLibs = [] } = require(paths.ideConfig);
+const { proxyLabPathPrefix = '../' } = require(paths.ideConfig);
 
 const COMMON_EXTERNALS = {
   ette: {
@@ -65,6 +66,12 @@ const COMMON_EXTERNALS = {
     amd: 'ide-lib-utils',
     root: 'ideLibUtils'
   },
+  'ide-model-utils': {
+    commonjs: 'ide-model-utils',
+    commonjs2: 'ide-model-utils',
+    amd: 'ide-model-utils',
+    root: 'ideModelUtils'
+  },
   'ide-lib-base-component': {
     commonjs: 'ide-lib-base-component',
     commonjs2: 'ide-lib-base-component',
@@ -100,6 +107,7 @@ const COMMON_LIBS = Object.keys(COMMON_EXTERNALS);
 const ALIAS_LIBS = [
   'ide-lib-base-component',
   'ide-lib-engine',
+  'ide-model-utils',
   'ide-lib-utils'
 ].concat(proxyLibs || []);
 
@@ -126,9 +134,18 @@ module.exports = {
     ALIAS_LIBS.forEach(lib => {
       const isObj = typeof lib === 'object';
       const aliasName = isObj ? lib['name'] : lib;
-      const dirPath = isObj
-        ? paths.resolveApp(lib['path'])
-        : paths.resolveApp(`../${lib}/`);
+
+      // 支持 proxyLabPathPrefix 配置项，不同的配置项情况不一样
+      // 做一下兼容性，如果是绝对路径，则不需要进行 resolve
+      console.log(555, proxyLabPathPrefix);
+      const dirPath = '';
+      if(isObj) {
+        const libPath = lib['path'];
+        dirPath = path.isAbsolute(libPath) ? libPath : path.resolveApp(path.join(proxyLabPathPrefix, libPath))
+      } else {
+        dirPath = paths.resolveApp(path.join(proxyLabPathPrefix, lib));
+      }
+      
       if (!aliasName) {
         throw new Error('aliasName not exist!');
       }
