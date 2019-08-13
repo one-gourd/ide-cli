@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { getAlias } = require('./webpack-helper');
 
 const paths = require('./paths');
-const { name } = require(paths.ideConfig);
+const { name, disableDemoEntry } = require(paths.ideConfig);
 
 // const targetDir = 'dist';
 
@@ -16,12 +16,16 @@ module.exports = common.map(config => {
     devtool: 'inline-source-map',
     resolve: getAlias(),
     plugins: [
-      new HtmlWebpackPlugin({
-        title: name,
-        excludeChunks: ['index', 'index.js'],
-        // Load a custom template (lodash by default)
-        template: 'demo/index.html'
-      }),
+      new HtmlWebpackPlugin(
+        Object.assign(
+          {
+            title: name,
+            // Load a custom template (lodash by default)
+            template: 'demo/index.html'
+          },
+          disableDemoEntry ? {} : { excludeChunks: ['index', 'index.js'] }
+        )
+      ),
       new webpack.HotModuleReplacementPlugin(), // enable HMR globally
       new webpack.NamedModulesPlugin() // prints more readable module names in the browser console on HMR updates
     ]
@@ -30,5 +34,4 @@ module.exports = common.map(config => {
   console.log('resolve:', result.resolve);
 
   return result;
-
 });

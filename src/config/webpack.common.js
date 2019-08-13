@@ -1,11 +1,15 @@
 const paths = require('./paths');
 const { getExternal } = require('./webpack-helper');
 
+const { disableDemoEntry } = require(paths.ideConfig);
+
 const commontConfig = {
-  entry: {
-    index: './src/index.tsx',
-    demo: './demo/demo.tsx'
-  },
+  entry: Object.assign(
+    {
+      index: './src/index.tsx'
+    },
+    disableDemoEntry ? {} : { demo: './demo/demo.tsx' }
+  ),
   node: {
     fs: 'empty'
   },
@@ -33,11 +37,9 @@ const commontConfig = {
       }
     ]
   },
-  resolve: Object.assign(
-    {
-      extensions: ['.tsx', '.ts', '.js']
-    }
-  )
+  resolve: Object.assign({
+    extensions: ['.tsx', '.ts', '.js']
+  })
 };
 
 const normalConfig = Object.assign({}, commontConfig, {
