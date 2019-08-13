@@ -3,15 +3,18 @@ const common = require('./webpack.common.js');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const { getAlias } = require('./webpack-helper');
+
 const paths = require('./paths');
 const { name } = require(paths.ideConfig);
 
 // const targetDir = 'dist';
 
 module.exports = common.map(config => {
-  return merge(config, {
+  const result = merge(config, {
     mode: 'development',
     devtool: 'inline-source-map',
+    resolve: getAlias(),
     plugins: [
       new HtmlWebpackPlugin({
         title: name,
@@ -23,4 +26,9 @@ module.exports = common.map(config => {
       new webpack.NamedModulesPlugin() // prints more readable module names in the browser console on HMR updates
     ]
   });
+
+  console.log('resolve:', result.resolve);
+
+  return result;
+
 });

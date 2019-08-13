@@ -1,7 +1,9 @@
+const path = require('path');
 const paths = require('./paths');
 
 const { proxyLibs = [] } = require(paths.ideConfig);
 const { proxyLabPathPrefix = '../' } = require(paths.ideConfig);
+
 
 const COMMON_EXTERNALS = {
   ette: {
@@ -104,12 +106,7 @@ const ALL_EXTERNALS = Object.assign({}, COMMON_EXTERNALS, {
 const COMMON_LIBS = Object.keys(COMMON_EXTERNALS);
 
 // 使用 alias 解决基础包打包的问题，方便调试时修改
-const ALIAS_LIBS = [
-  'ide-lib-base-component',
-  'ide-lib-engine',
-  'ide-model-utils',
-  'ide-lib-utils'
-].concat(proxyLibs || []);
+const ALIAS_LIBS = proxyLibs || [];
 
 module.exports = {
   COMMON_EXTERNALS,
@@ -137,8 +134,7 @@ module.exports = {
 
       // 支持 proxyLabPathPrefix 配置项，不同的配置项情况不一样
       // 做一下兼容性，如果是绝对路径，则不需要进行 resolve
-      console.log(555, proxyLabPathPrefix);
-      const dirPath = '';
+      let dirPath = '';
       if(isObj) {
         const libPath = lib['path'];
         dirPath = path.isAbsolute(libPath) ? libPath : path.resolveApp(path.join(proxyLabPathPrefix, libPath))

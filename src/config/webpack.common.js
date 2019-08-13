@@ -1,5 +1,5 @@
 const paths = require('./paths');
-const { getExternal, getAlias } = require('./webpack-helper');
+const { getExternal } = require('./webpack-helper');
 
 const commontConfig = {
   entry: {
@@ -36,8 +36,7 @@ const commontConfig = {
   resolve: Object.assign(
     {
       extensions: ['.tsx', '.ts', '.js']
-    },
-    (process.env.NODE_ENV = 'production' ? {} : getAlias())
+    }
   )
 };
 
