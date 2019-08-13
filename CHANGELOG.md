@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.2](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.2.1...v0.2.2) (2019-08-13)
+
+
+### Bug Fixes
+
+* 🐛 修复 process.env.NODE_ENV 导致的问题 ([77c5858](https://github.com/alibaba-paimai-frontend/ide-cli/commit/77c5858))
+
+
+### Features
+
+* 🎸 功能新增：新增 disableDemoEntry 选项 ([9ab0c01](https://github.com/alibaba-paimai-frontend/ide-cli/commit/9ab0c01))
+* 🎸 新增 ide-model-utils 的 externals 和 proxyLabspath ([5c0210d](https://github.com/alibaba-paimai-frontend/ide-cli/commit/5c0210d))
+
+
+
 ## [0.2.1](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.2.0...v0.2.1) (2019-07-26)
 
 
