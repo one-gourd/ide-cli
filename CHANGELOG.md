@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.3](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.2.2...v0.2.3) (2019-08-19)
+
+
+### Features
+
+* 🎸 功能新增: prodWithProxy 功能 ([4f4f4e9](https://github.com/alibaba-paimai-frontend/ide-cli/commit/4f4f4e9))
+
+
+
 ## [0.2.2](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.2.1...v0.2.2) (2019-08-13)
 
 
