@@ -4,12 +4,12 @@ const webpack = require('webpack');
 // const CleanWebpackPlugin = require('clean-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 // const path = require('path');
-const { getExternal } = require('./webpack-helper');
+const { getExternal, getAlias } = require('./webpack-helper');
 const paths = require('./paths');
-const { libName } = require(paths.ideConfig);
+const { libName, prodWithProxy } = require(paths.ideConfig);
 
 // const isDebug = process.env.DEBUG === 'true';
-
+console.log('prodWithProxy: ', prodWithProxy);
 module.exports = common.map(config => {
   /* 这份配置是用于引入到浏览器中时候用的
      比如 https://unpkg.com/ide-context-menu@0.1.2/dist/index.umd.js
@@ -19,6 +19,8 @@ module.exports = common.map(config => {
     externals: getExternal([], true),
     mode: 'production',
     devtool: 'source-map',
+    ...(prodWithProxy ? { resolve: getAlias() } : {}),
+
     optimization: {
       minimizer: [new TerserPlugin()]
     },
