@@ -3,7 +3,7 @@ const paths = require('./paths');
 
 const { proxyLibs = [] } = require(paths.ideConfig);
 const { proxyLabPathPrefix = '../' } = require(paths.ideConfig);
-
+const { extraLibs = [] } = require(paths.ideConfig);
 
 const COMMON_EXTERNALS = {
   ette: {
@@ -88,20 +88,55 @@ const COMMON_EXTERNALS = {
   }
 };
 
-const ALL_EXTERNALS = Object.assign({}, COMMON_EXTERNALS, {
-  'ss-tree': {
-    commonjs: 'ss-tree',
-    commonjs2: 'ss-tree',
-    amd: 'ss-tree',
-    root: 'ssTree'
-  },
-  'ide-code-editor': {
-    commonjs: 'ide-code-editor',
-    commonjs2: 'ide-code-editor',
-    amd: 'ide-code-editor',
-    root: 'ideCodeEditor'
+const extraLibArray = [].concat(extraLibs);
+let otherExternalObj = {}; // 收集额外的 external 对象
+const extraExtenalKeys = []; // 获取额外 externals keys
+extraLibArray.forEach(lib => {
+  if (typeof lib === 'object') {
+    otherExternalObj = Object.assign({}, otherExternalObj, lib);
+    extraExtenalKeys.push(Object.keys(lib));
+  } else if (typeof lib === 'string') {
+    extraExtenalKeys.push(lib);
   }
 });
+
+const ALL_EXTERNALS = Object.assign(
+  {},
+  COMMON_EXTERNALS,
+  {
+    'react-dnd': {
+      commonjs: 'react-dnd',
+      commonjs2: 'react-dnd',
+      amd: 'react-dnd',
+      root: 'ReactDnD'
+    },
+    'react-dnd-html5-backend': {
+      commonjs: 'react-dnd-html5-backend',
+      commonjs2: 'react-dnd-html5-backend',
+      amd: 'react-dnd-html5-backend',
+      root: 'ReactDnDHTML5Backend'
+    },
+    'react-dnd-touch-backend': {
+      commonjs: 'react-dnd-touch-backend',
+      commonjs2: 'react-dnd-touch-backend',
+      amd: 'react-dnd-touch-backend',
+      root: 'ReactDnDTouchBackend'
+    },
+    'ss-tree': {
+      commonjs: 'ss-tree',
+      commonjs2: 'ss-tree',
+      amd: 'ss-tree',
+      root: 'ssTree'
+    },
+    'ide-code-editor': {
+      commonjs: 'ide-code-editor',
+      commonjs2: 'ide-code-editor',
+      amd: 'ide-code-editor',
+      root: 'ideCodeEditor'
+    }
+  },
+  otherExternalObj
+);
 
 const COMMON_LIBS = Object.keys(COMMON_EXTERNALS);
 
@@ -110,8 +145,8 @@ const ALIAS_LIBS = proxyLibs || [];
 
 module.exports = {
   COMMON_EXTERNALS,
-  getExternal: function(extraLibs = [], isProduction = false) {
-    const libs = COMMON_LIBS.concat(extraLibs);
+  getExternal: function(isProduction = false) {
+    const libs = COMMON_LIBS.concat(extraExtenalKeys);
     const externals = {};
     libs.forEach(lib => {
       // 如果是 dev 状态，优先使用 alias 配置而不是 externals
@@ -135,13 +170,15 @@ module.exports = {
       // 支持 proxyLabPathPrefix 配置项，不同的配置项情况不一样
       // 做一下兼容性，如果是绝对路径，则不需要进行 resolve
       let dirPath = '';
-      if(isObj) {
+      if (isObj) {
         const libPath = lib['path'];
-        dirPath = path.isAbsolute(libPath) ? libPath : path.resolveApp(path.join(proxyLabPathPrefix, libPath))
+        dirPath = path.isAbsolute(libPath)
+          ? libPath
+          : paths.resolveApp(path.join(proxyLabPathPrefix, libPath));
       } else {
         dirPath = paths.resolveApp(path.join(proxyLabPathPrefix, lib));
       }
-      
+
       if (!aliasName) {
         throw new Error('aliasName not exist!');
       }

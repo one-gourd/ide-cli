@@ -13,7 +13,7 @@ module.exports = common.map(config => {
   /* 这份配置是用于发布 demo 到 gh-pages 分支使用的  */
   return merge(config, {
     entry: './demo/demo.tsx',
-    externals: getExternal([], true),
+    externals: getExternal(true),
     mode: 'production',
     devtool: 'source-map',
     optimization: {
