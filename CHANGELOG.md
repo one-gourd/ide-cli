@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.4](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.2.3...v0.2.4) (2019-11-07)
+
+
+### Features
+
+* 🎸 功能新增: electron 相关配置; 修复 extraLib 相关 bug ([f0062e4](https://github.com/alibaba-paimai-frontend/ide-cli/commit/f0062e4))
+* 🎸 功能新增: 新增 extraLibs 配置项 ([085273b](https://github.com/alibaba-paimai-frontend/ide-cli/commit/085273b))
+
+
+
 ## [0.2.3](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.2.2...v0.2.3) (2019-08-19)
 
 
