@@ -6,7 +6,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { getAlias } = require('./webpack-helper');
 
 const paths = require('./paths');
-const { name, disableDemoEntry } = require(paths.ideConfig);
+const { name, disableDemoEntry, withElectron } = require(paths.ideConfig);
+// const paths = require('./paths');
+// const { withElectron } = require(paths.ideConfig);
 
 // const targetDir = 'dist';
 
@@ -14,6 +16,7 @@ module.exports = common.map(config => {
   const result = merge(config, {
     mode: 'development',
     devtool: 'inline-source-map',
+    target: withElectron ? 'electron-renderer' : 'web',
     resolve: getAlias(),
     plugins: [
       new HtmlWebpackPlugin(

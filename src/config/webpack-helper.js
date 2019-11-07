@@ -90,11 +90,11 @@ const COMMON_EXTERNALS = {
 
 const extraLibArray = [].concat(extraLibs);
 let otherExternalObj = {}; // 收集额外的 external 对象
-const extraExtenalKeys = []; // 获取额外 externals keys
+let extraExtenalKeys = []; // 获取额外 externals keys
 extraLibArray.forEach(lib => {
   if (typeof lib === 'object') {
     otherExternalObj = Object.assign({}, otherExternalObj, lib);
-    extraExtenalKeys.push(Object.keys(lib));
+    extraExtenalKeys = extraExtenalKeys.concat(Object.keys(lib));
   } else if (typeof lib === 'string') {
     extraExtenalKeys.push(lib);
   }
@@ -159,6 +159,8 @@ module.exports = {
           : (ALL_EXTERNALS[lib] && ALL_EXTERNALS[lib].root) || lib;
       }
     });
+
+    // console.log('externals: ', externals);
     return externals;
   },
   getAlias: function() {
