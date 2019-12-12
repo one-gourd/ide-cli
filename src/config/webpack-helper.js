@@ -142,6 +142,8 @@ const COMMON_LIBS = Object.keys(COMMON_EXTERNALS);
 
 // 使用 alias 解决基础包打包的问题，方便调试时修改
 const ALIAS_LIBS = proxyLibs || [];
+// 提取 alias keys ，因为有可能是 object 元素
+const ALIAS_LIBS_KEYS = ALIAS_LIBS.map(lib => typeof lib === 'object' ? lib.name : lib)
 
 module.exports = {
   COMMON_EXTERNALS,
@@ -150,7 +152,7 @@ module.exports = {
     const externals = {};
     libs.forEach(lib => {
       // 如果是 dev 状态，优先使用 alias 配置而不是 externals
-      if (!isProduction && !!~ALIAS_LIBS.indexOf(lib)) {
+      if (!isProduction && !!~ALIAS_LIBS_KEYS.indexOf(lib)) {
         process.env.NODE_ENV !== 'production' &&
           console.log(`依赖库 "${lib}" 优先使用 alias 配置`);
       } else {
@@ -167,7 +169,7 @@ module.exports = {
     const alias = {};
     ALIAS_LIBS.forEach(lib => {
       const isObj = typeof lib === 'object';
-      const aliasName = isObj ? lib['name'] : lib;
+      const aliasName = isObj ? lib.name : lib;
 
       // 支持 proxyLabPathPrefix 配置项，不同的配置项情况不一样
       // 做一下兼容性，如果是绝对路径，则不需要进行 resolve
