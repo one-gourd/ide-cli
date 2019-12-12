@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.5](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.2.4...v0.2.5) (2019-12-12)
+
+
+### Features
+
+* 🎸 功能新增: 使用 ALIAS_LIBS_KEYS 数组来增强 dev 时的 alias 剥离 ([2838086](https://github.com/alibaba-paimai-frontend/ide-cli/commit/2838086))
+
+
+
 ## [0.2.4](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.2.3...v0.2.4) (2019-11-07)
 
 
