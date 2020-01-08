@@ -229,8 +229,11 @@ function removeBlockOrNot(filepath, tag, shouldRemoveBlock) {
 module.exports = (args, options, logger) => {
     debugMini(`命令行 options: ${JSON.stringify(options)}`);
 
+    const targetInitDir = options.targetDir || cwd; // 如果不指定目标文件夹，则使用 cwd
+
     // 读取 json 配置文件
-    let jsonPath = path.join(cwd, args.jsonfile);
+    let jsonPath = path.resolve(targetInitDir, args.jsonfile);
+    // console.log(1111, cwd, args.jsonfile);
     const configs = parseOrFalse(readFileOrEmpty(jsonPath));
     invariant(!!configs, `${jsonPath} 文件内容为空，请检查`, logger);
 
@@ -252,14 +255,15 @@ module.exports = (args, options, logger) => {
 
     debugExtra(`====> config 内容 ${JSON.stringify(configs, null, 4)}`);
 
-    const targetDirection = path.join(cwd, configs.name);
+    const targetDirection = path.join(targetInitDir, configs.name);
     debugMini(`目标文件夹：${targetDirection}`);
 
     if (options.local) {
         debugMini(`不拉取远程仓库，本地替换`);
         replaceFiles(targetDirection, configs, logger);
     } else {
-        cloneRepo(configs.name, () => {
+        // 克隆到目标文件夹
+        cloneRepo(targetDirection, () => {
             replaceFiles(targetDirection, configs, logger);
         }, configs.templater);
     }
