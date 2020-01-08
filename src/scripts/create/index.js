@@ -7,6 +7,7 @@ const {
     invariant,
     escapeRegex,
     isExistFile,
+    writeFileOrNone,
     isTrue
 } = require('../../lib/util');
 const variables = require('./_variables');
@@ -186,6 +187,18 @@ function replaceFiles(targetDirection, configs, logger) {
         }
     }
     // =============
+
+
+    // 生成 ide.config.js 文件
+    console.log(`\n>>> STEP 4: 生成 ide.config.js 文件： <<<`);
+    const ideConfigFile = path.join(targetDirection, 'ide.config.js');
+    writeFileOrNone(ideConfigFile, 'module.exports = ' + JSON.stringify(configs, (key, value) => {
+        // 需要忽略一些 npm 相关的信息
+        if (!!~['version', 'homepage', 'repo', 'description', 'author'].indexOf(key)) {
+            return undefined;
+        }
+        return value;
+    }, 4));
 }
 
 /**
