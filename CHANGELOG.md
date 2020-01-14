@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.6](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.2.5...v0.2.6) (2020-01-14)
+
+
+### Bug Fixes
+
+* 🐛 功能新增: 动态生成 ide.config.js 文件 ([7de497b](https://github.com/alibaba-paimai-frontend/ide-cli/commit/7de497b))
+
+
+### Features
+
+* 🎸 功能完善: 新增 targetDir 配置项; 兼容自定义路径配置; ([43e247d](https://github.com/alibaba-paimai-frontend/ide-cli/commit/43e247d))
+
+
+
 ## [0.2.5](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.2.4...v0.2.5) (2019-12-12)
 
 
