@@ -115,11 +115,26 @@ function applyConfig(program, cliConfig, excludes = []) {
   return program;
 }
 
+function pick(object, paths) {
+  const obj = {};
+  for (const path of paths) {
+    if (isExist(object[path])) {
+      obj[path] = object[path];
+    }
+  }
+  return obj;
+}
+function isExist(val) {
+  return typeof val !== 'undefined' && val !== null;
+}
+
 module.exports = {
   applyConfig,
   readFileOrEmpty,
   writeFileOrNone,
   isExistFile,
+  isExist,
+  pick,
   parseOrFalse,
   escapeRegex,
   mkdirSyncOrNone,
