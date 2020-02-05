@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.7](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.2.6...v0.2.7) (2020-02-05)
+
+
+### Features
+
+* 🎸 功能新增: build 支持全打包 fullpackage 模式 ([a8b7258](https://github.com/alibaba-paimai-frontend/ide-cli/commit/a8b7258))
+
+
+
 ## [0.2.6](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.2.5...v0.2.6) (2020-01-14)
 
 
