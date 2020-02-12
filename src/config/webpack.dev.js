@@ -6,11 +6,24 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { getAlias } = require('./webpack-helper');
 
 const paths = require('./paths');
-const { name, disableDemoEntry, withElectron } = require(paths.ideConfig);
+const {
+  name,
+  disableDemoEntry,
+  withElectron,
+  htmlPlugin = {}
+} = require(paths.ideConfig);
 // const paths = require('./paths');
 // const { withElectron } = require(paths.ideConfig);
 
 // const targetDir = 'dist';
+
+const {
+  template = 'demo/index.html',
+  title = name,
+
+  // 自定义插入位置：https://github.com/jantimon/html-webpack-plugin/blob/master/examples/custom-insertion-position/readme.md ，配合使用 <%= htmlWebpackPlugin.tags.bodyTags %>
+  inject = true
+} = htmlPlugin;
 
 module.exports = common.map(config => {
   const result = merge(config, {
@@ -22,9 +35,10 @@ module.exports = common.map(config => {
       new HtmlWebpackPlugin(
         Object.assign(
           {
-            title: name,
+            title,
             // Load a custom template (lodash by default)
-            template: 'demo/index.html'
+            template: template,
+            inject
           },
           disableDemoEntry ? {} : { excludeChunks: ['index', 'index.js'] }
         )

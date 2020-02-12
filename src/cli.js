@@ -12,7 +12,8 @@ const spawn = require('react-dev-utils/crossSpawn');
 
 const path = require('path');
 const { readFileOrEmpty, parseOrFalse, applyConfig } = require('./lib/util');
-const installConfig = require('./scripts/install/config');
+const installScriptConfig = require('./scripts/install/config');
+const devScriptConfig = require('./scripts/dev/config');
 
 const pkgFile = path.join(__dirname, '../package.json');
 const pkgJson = parseOrFalse(readFileOrEmpty(pkgFile));
@@ -75,23 +76,19 @@ program
     '-l, --local',
     'not git clone repository - 不从远程拉取仓库（方便本地调试）'
   )
-  .option(
-    '-d, --targetDir',
-    'target directory - 指定初始化的目标文件夹位置'
-  )
+  .option('-d, --targetDir', 'target directory - 指定初始化的目标文件夹位置')
   .action(actionCreate)
-  .command('dev', 'Start developing - 本地调试开发')
-  .option('-p, --port', 'custom port - 指定调试服务器的端口（默认是 9000）')
-  .action(() => {
-    spawnCommand('dev');
-  })
   .command('build', 'Build  - 打包构建')
   .action(() => {
     spawnCommand('build');
   });
 
-applyConfig(program, installConfig).action(() => {
+applyConfig(program, installScriptConfig).action(() => {
   spawnCommand('install');
+});
+
+applyConfig(program, devScriptConfig).action(() => {
+  spawnCommand('dev');
 });
 
 program.parse(process.argv);
