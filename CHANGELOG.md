@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.8](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.2.7...v0.2.8) (2020-02-12)
+
+
+### Features
+
+* 🎸 功能增强: 支持 dev 时传入 port 端口; 重构 dev 目录; 支持 htmlPlugin 字段 ([85fe09b](https://github.com/alibaba-paimai-frontend/ide-cli/commit/85fe09b))
+
+
+
 ## [0.2.7](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.2.6...v0.2.7) (2020-02-05)
 
 
