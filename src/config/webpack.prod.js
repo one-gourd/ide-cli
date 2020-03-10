@@ -13,6 +13,7 @@ const {
   fullPackageMode,
   fullPackageExternals = []
 } = require(paths.ideConfig);
+const { version } = require(paths.appPackageJson);
 
 // const isDebug = process.env.DEBUG === 'true';
 console.log('prodWithProxy: ', prodWithProxy);
@@ -37,12 +38,14 @@ const buildConfig = common.map(config => {
     plugins: [
       // new CleanWebpackPlugin(paths.appDist),
       new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify('production')
+        'process.env.NODE_ENV': JSON.stringify('production'),
+        __VERSION__: JSON.stringify(version)
       })
     ],
     output: {
       filename: 'index.umd.js',
       libraryTarget: 'umd',
+      chunkFilename: '[name].bundle.js', // 非 entry 部分使用该命名法则
       library: libName,
       path: paths.appDist,
       umdNamedDefine: true
@@ -59,6 +62,5 @@ if (fullPackageMode) {
     curConfig.externals = externalsConfig;
   });
 }
-
 
 module.exports = buildConfig;

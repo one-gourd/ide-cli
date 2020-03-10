@@ -45,6 +45,7 @@ const commontConfig = {
 const normalConfig = Object.assign({}, commontConfig, {
   output: {
     filename: '[name].js',
+    chunkFilename: '[name].bundle.js', // 非 entry 模块使用该命名方式
     path: paths.appDist
   }
 });

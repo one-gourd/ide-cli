@@ -12,6 +12,8 @@ const {
   withElectron,
   htmlPlugin = {}
 } = require(paths.ideConfig);
+
+const { version } = require(paths.appPackageJson);
 // const paths = require('./paths');
 // const { withElectron } = require(paths.ideConfig);
 
@@ -32,6 +34,9 @@ module.exports = common.map(config => {
     target: withElectron ? 'electron-renderer' : 'web',
     resolve: getAlias(),
     plugins: [
+      new webpack.DefinePlugin({
+        __VERSION__: JSON.stringify(version)
+      }),
       new HtmlWebpackPlugin(
         Object.assign(
           {
