@@ -1,6 +1,8 @@
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const webpack = require('webpack');
+const fs = require('fs');
+
 // const CleanWebpackPlugin = require('clean-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 // const path = require('path');
@@ -9,6 +11,7 @@ const { pick } = require('../lib/util');
 const paths = require('./paths');
 const {
   libName,
+  publicPath,
   prodWithProxy,
   fullPackageMode,
   fullPackageExternals = []
@@ -48,10 +51,26 @@ const buildConfig = common.map(config => {
       chunkFilename: '[name].bundle.js', // 非 entry 部分使用该命名法则
       library: libName,
       path: paths.appDist,
+      publicPath: publicPath || '',
       umdNamedDefine: true
     }
   });
 });
+
+// 默认只有一份动态加载的 js 脚本，可以指定常规非动态脚本加载方式
+// 但如果存在 `index.dynamic.tsx` 文件，将同时新增一份非动态加载文件
+if (fs.existsSync(paths.appDynamicIndex)) {
+  console.log(
+    '探测到 index.dynamic.tsx 文件存在，将额外打包一份支持动态加载的入口文件'
+  );
+  // const secondConfig = Object.assign({}, buildConfig[0]);
+  buildConfig[0].entry = {
+    index: './src/index.tsx',
+    'index.dynamic': './src/index.dynamic.tsx'
+  };
+  buildConfig[0].output.filename = '[name].umd.js';
+}
+// console.log(999, buildConfig);
 
 if (fullPackageMode) {
   // 如果是完整打包模式，只挑选其中的 fullPackageExternals 指定的包（子集）
