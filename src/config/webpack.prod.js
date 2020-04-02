@@ -68,6 +68,15 @@ if (fs.existsSync(paths.appDynamicIndex)) {
     index: './src/index.tsx',
     'index.dynamic': './src/index.dynamic.tsx'
   };
+
+  // 如果有 deps.ts 文件，需要生成依赖文件
+  if (fs.existsSync(paths.appDepsFile)) {
+    console.log(
+      '探测到 deps.tsx 文件存在，将额外打包一份依赖文件'
+    );
+    buildConfig[0].entry.deps = './src/deps.ts';
+  }
+
   buildConfig[0].output.filename = '[name].umd.js';
 }
 // console.log(999, buildConfig);

@@ -89,6 +89,7 @@ module.exports = {
   appJsConfig: resolveApp('jsconfig.json'),
   electronMain: resolveModule(resolveApp, 'src/electron'),
   appDynamicIndex: resolveModule(resolveApp, 'src/index.dynamic'),
+  appDepsFile: resolveModule(resolveApp, 'src/deps'),
   yarnLockFile: resolveApp('yarn.lock'),
   testsSetup: resolveModule(resolveApp, 'src/setupTests'),
   proxySetup: resolveApp('src/setupProxy.js'),
