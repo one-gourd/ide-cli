@@ -10,6 +10,7 @@ const {
   name,
   disableDemoEntry,
   withElectron,
+  publicPath,
   htmlPlugin = {}
 } = require(paths.ideConfig);
 
@@ -35,7 +36,8 @@ module.exports = common.map(config => {
     resolve: getAlias(),
     plugins: [
       new webpack.DefinePlugin({
-        __VERSION__: JSON.stringify(version)
+        __VERSION__: JSON.stringify(version),
+        __PUBLIC_PATH__: JSON.stringify(publicPath || '')
       }),
       new HtmlWebpackPlugin(
         Object.assign(

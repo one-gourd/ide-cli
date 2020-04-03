@@ -42,7 +42,8 @@ const buildConfig = common.map(config => {
       // new CleanWebpackPlugin(paths.appDist),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('production'),
-        __VERSION__: JSON.stringify(version)
+        __VERSION__: JSON.stringify(version),
+        __PUBLIC_PATH__: JSON.stringify(publicPath || '')
       })
     ],
     output: {
@@ -71,9 +72,7 @@ if (fs.existsSync(paths.appDynamicIndex)) {
 
   // 如果有 deps.ts 文件，需要生成依赖文件
   if (fs.existsSync(paths.appDepsFile)) {
-    console.log(
-      '探测到 deps.tsx 文件存在，将额外打包一份依赖文件'
-    );
+    console.log('探测到 deps.tsx 文件存在，将额外打包一份依赖文件');
     buildConfig[0].entry.deps = './src/deps.ts';
   }
 
