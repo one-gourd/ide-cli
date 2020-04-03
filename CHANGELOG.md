@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.11](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.2.9...v0.2.11) (2020-04-03)
+
+
+### Features
+
+* 🎸 功能增强: 支持额外打包 index.dynamic 文件 ([dbc8169](https://github.com/alibaba-paimai-frontend/ide-cli/commit/dbc8169))
+* 🎸 功能完善: 新增 __PUBLIC_PATH__ 变量替换 ([0c8dc18](https://github.com/alibaba-paimai-frontend/ide-cli/commit/0c8dc18))
+* 🎸 动态加载: 支持 deps.ts 文件的打包输出 ([297a261](https://github.com/alibaba-paimai-frontend/ide-cli/commit/297a261))
+
+
+
 ## [0.2.10](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.2.9...v0.2.10) (2020-03-27)
 
 
