@@ -6,9 +6,9 @@ const { disableDemoEntry } = require(paths.ideConfig);
 const commontConfig = {
   entry: Object.assign(
     {
-      index: './src/index.tsx'
+      index: './src/index'
     },
-    disableDemoEntry ? {} : { demo: './demo/demo.tsx' }
+    disableDemoEntry ? {} : { demo: './demo/demo' }
   ),
   node: {
     fs: 'empty'

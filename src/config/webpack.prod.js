@@ -24,12 +24,14 @@ console.log('fullPackageMode: ', fullPackageMode);
 
 let externalsConfig = getExternal(true); // 默认打包时，尽可能 externals 公共包
 
+// 兼容 publicPath 是对象的形式
+
 const buildConfig = common.map(config => {
   /* 这份配置是用于引入到浏览器中时候用的
      比如 https://unpkg.com/ide-context-menu@0.1.2/dist/index.umd.js
   */
   return merge(config, {
-    entry: './src/index.tsx',
+    entry: './src/index',
     externals: externalsConfig,
     mode: 'production',
     devtool: 'source-map',
