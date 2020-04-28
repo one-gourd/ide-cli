@@ -14,6 +14,7 @@ const path = require('path');
 const { readFileOrEmpty, parseOrFalse, applyConfig } = require('./lib/util');
 const installScriptConfig = require('./scripts/install/config');
 const devScriptConfig = require('./scripts/dev/config');
+const buildScriptConfig = require('./scripts/build/config');
 
 const pkgFile = path.join(__dirname, '../package.json');
 const pkgJson = parseOrFalse(readFileOrEmpty(pkgFile));
@@ -77,11 +78,7 @@ program
     'not git clone repository - 不从远程拉取仓库（方便本地调试）'
   )
   .option('-d, --targetDir', 'target directory - 指定初始化的目标文件夹位置')
-  .action(actionCreate)
-  .command('build', 'Build  - 打包构建')
-  .action(() => {
-    spawnCommand('build');
-  });
+  .action(actionCreate);
 
 applyConfig(program, installScriptConfig).action(() => {
   spawnCommand('install');
@@ -89,6 +86,10 @@ applyConfig(program, installScriptConfig).action(() => {
 
 applyConfig(program, devScriptConfig).action(() => {
   spawnCommand('dev');
+});
+
+applyConfig(program, buildScriptConfig).action(() => {
+  spawnCommand('build');
 });
 
 program.parse(process.argv);
