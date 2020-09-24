@@ -1,5 +1,5 @@
 const merge = require('webpack-merge');
-const common = require('./webpack.common.js');
+const { common, workboxPluginConfig } = require('./webpack.common.js');
 const webpack = require('webpack');
 const fs = require('fs');
 
@@ -41,6 +41,7 @@ const buildConfig = common.map(config => {
       minimizer: [new TerserPlugin()]
     },
     plugins: [
+      ...workboxPluginConfig,
       // new CleanWebpackPlugin(paths.appDist),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('production'),

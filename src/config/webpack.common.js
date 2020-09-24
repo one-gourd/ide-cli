@@ -1,7 +1,17 @@
 const paths = require('./paths');
 const { getExternal } = require('./webpack-helper');
+const { InjectManifest } = require('workbox-webpack-plugin');
 
-const { disableDemoEntry } = require(paths.ideConfig);
+const { disableDemoEntry, workbox } = require(paths.ideConfig);
+
+
+const workboxPluginConfig = workbox ? [
+  new InjectManifest({
+    swSrc: './sw.js',
+    swDest: 'sw.js',
+    // Any other config if needed.
+  }),
+] : [];
 
 const commontConfig = {
   entry: Object.assign(
@@ -50,4 +60,7 @@ const normalConfig = Object.assign({}, commontConfig, {
   }
 });
 
-module.exports = [normalConfig];
+module.exports = {
+  common: [normalConfig],
+  workboxPluginConfig,
+};

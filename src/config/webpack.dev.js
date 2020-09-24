@@ -1,5 +1,5 @@
 const merge = require('webpack-merge');
-const common = require('./webpack.common.js');
+const { common, workboxPluginConfig } = require('./webpack.common.js');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -35,6 +35,7 @@ module.exports = common.map(config => {
     target: withElectron ? 'electron-renderer' : 'web',
     resolve: getAlias(),
     plugins: [
+      ...workboxPluginConfig,
       new webpack.DefinePlugin({
         __VERSION__: JSON.stringify(version),
         __PUBLIC_PATH__: JSON.stringify(publicPath || '')

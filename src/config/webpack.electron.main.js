@@ -1,5 +1,5 @@
 // const merge = require('webpack-merge');
-// const common = require('./webpack.common.js');
+// const { common } = require('./webpack.common.js');
 // const webpack = require('webpack');
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
 
