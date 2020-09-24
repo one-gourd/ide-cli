@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.15](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.2.11...v0.2.15) (2020-09-24)
+
+
+### Bug Fixes
+
+* 🐛 修复 build 脚本命令; ([a68e361](https://github.com/alibaba-paimai-frontend/ide-cli/commit/a68e361))
+
+
+### Features
+
+* 🎸 功能完善: 使用 caporal 进行包装 build 脚本 ([0b58f08](https://github.com/alibaba-paimai-frontend/ide-cli/commit/0b58f08))
+* 🎸 功能新增: 支持 workbox 插件 ([5b2db4a](https://github.com/alibaba-paimai-frontend/ide-cli/commit/5b2db4a))
+* 🎸 扩展入口文件后缀 ([3de0fbf](https://github.com/alibaba-paimai-frontend/ide-cli/commit/3de0fbf))
+
+
+
 ## [0.2.11](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.2.9...v0.2.11) (2020-04-03)
 
 
