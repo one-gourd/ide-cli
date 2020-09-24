@@ -2,16 +2,20 @@ const paths = require('./paths');
 const { getExternal } = require('./webpack-helper');
 const { InjectManifest } = require('workbox-webpack-plugin');
 
-const { disableDemoEntry, workbox } = require(paths.ideConfig);
+const { disableDemoEntry, workbox, workboxConfig = {} } = require(paths.ideConfig);
 
 
-const workboxPluginConfig = workbox ? [
-  new InjectManifest({
-    swSrc: './sw.js',
-    swDest: 'sw.js',
-    // Any other config if needed.
-  }),
-] : [];
+const workboxPluginConfig = workbox
+  ? [
+      new InjectManifest({
+        swSrc: './sw.js',
+        swDest: 'sw.js',
+        // 忽略 d.ts 的缓存
+        exclude: [/\.d\.ts$/],
+        ...workboxConfig,
+      }),
+    ]
+  : [];
 
 const commontConfig = {
   entry: Object.assign(
