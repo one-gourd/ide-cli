@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.16](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.2.15...v0.2.16) (2020-09-24)
+
+
+### Features
+
+* 🎸 功能完善: 新增 workboxConfig 选项;默认排除 d.ts 文件 ([ec679c5](https://github.com/alibaba-paimai-frontend/ide-cli/commit/ec679c5))
+
+
+
 ## [0.2.15](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.2.11...v0.2.15) (2020-09-24)
 
 
