@@ -1,6 +1,6 @@
 {
   "name": "ide-component-cli",
-  "version": "0.2.16",
+  "version": "0.2.17",
   "description": "ide 命令行工具集",
   "main": "src/index.js",
   "bin": {
