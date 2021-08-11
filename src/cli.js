@@ -12,6 +12,7 @@ const spawn = require('react-dev-utils/crossSpawn');
 
 const path = require('path');
 const { readFileOrEmpty, parseOrFalse, applyConfig } = require('./lib/util');
+const createScriptConfig = require('./scripts/create/config');
 const installScriptConfig = require('./scripts/install/config');
 const devScriptConfig = require('./scripts/dev/config');
 const buildScriptConfig = require('./scripts/build/config');
@@ -20,11 +21,8 @@ const pkgFile = path.join(__dirname, '../package.json');
 const pkgJson = parseOrFalse(readFileOrEmpty(pkgFile));
 
 // ref: https://www.sitepoint.com/scaffolding-tool-caporal-js/
-// bar.tick();};
 
-const actionCreate = require('./scripts/create/');
-
-const CMD_LIST = ['install', 'build', 'dev', 'test'];
+const CMD_LIST = ['create', 'install', 'build', 'dev'];
 
 const spawnCommand = scriptName => {
   // 获取参数
@@ -70,15 +68,11 @@ const spawnCommand = scriptName => {
 
 program
   .version(pkgJson.version || 'unknown')
-  .description(pkgJson.description || 'ide 命令行工具')
-  .command('create', 'Create new compoent - 创建新的 ide 模块')
-  .argument('<jsonfile>', 'config json file - json 格式的配置文件')
-  .option(
-    '-l, --local',
-    'not git clone repository - 不从远程拉取仓库（方便本地调试）'
-  )
-  .option('-d, --targetDir', 'target directory - 指定初始化的目标文件夹位置')
-  .action(actionCreate);
+  .description(pkgJson.description || 'ide 命令行工具');
+
+applyConfig(program, createScriptConfig).action(() => {
+  spawnCommand('create');
+});
 
 applyConfig(program, installScriptConfig).action(() => {
   spawnCommand('install');

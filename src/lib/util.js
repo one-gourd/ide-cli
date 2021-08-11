@@ -20,7 +20,7 @@ function readFileOrEmpty(filepath) {
 function writeFileOrNone(filepath, data) {
   fs.writeFile(filepath, data, 'utf8', function(err) {
     if (err) {
-      console.log('=====> 写入数据到' + filepath + '失败');
+      console.log('=====> 写入数据到' + filepath + '失败', err);
       debugError('=====> 想要写入的数据：' + data);
       return;
     }

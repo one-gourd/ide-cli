@@ -8,11 +8,16 @@ const {
     escapeRegex,
     isExistFile,
     writeFileOrNone,
+    applyConfig,
     isTrue
 } = require('../../lib/util');
 const variables = require('./_variables');
 const shell = require('shelljs');
 const { cloneRepo } = require('./cloneRepo');
+
+const cliConfig = require('./config');
+
+const program = require('caporal');
 
 /**
  * 根据配置项，获取替换字符串
@@ -226,13 +231,13 @@ function removeBlockOrNot(filepath, tag, shouldRemoveBlock) {
     }
 }
 
-module.exports = (args, options, logger) => {
+const actionCreate = (args, options, logger) => {
     debugMini(`命令行 options: ${JSON.stringify(options)}`);
 
-    const targetInitDir = options.targetDir || cwd; // 如果不指定目标文件夹，则使用 cwd
+    const targetInitDir = !!options.targetDir ? path.join(cwd, options.targetDir)  : cwd; // 如果不指定目标文件夹，则使用 cwd
 
     // 读取 json 配置文件
-    let jsonPath = path.resolve(targetInitDir, args.jsonfile);
+    let jsonPath = path.resolve(cwd, args.jsonfile);
     // console.log(1111, cwd, args.jsonfile);
     const configs = parseOrFalse(readFileOrEmpty(jsonPath));
     invariant(!!configs, `${jsonPath} 文件内容为空，请检查`, logger);
@@ -268,3 +273,9 @@ module.exports = (args, options, logger) => {
         }, configs.templater);
     }
 };
+
+
+// 统一使用 caporal 进行包装
+applyConfig(program, cliConfig, 'command').action(actionCreate);
+
+program.parse(process.argv);
