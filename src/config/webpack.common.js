@@ -2,7 +2,15 @@ const paths = require('./paths');
 const { getExternal } = require('./webpack-helper');
 const { InjectManifest } = require('workbox-webpack-plugin');
 
-const { disableDemoEntry, workbox, workboxConfig = {} } = require(paths.ideConfig);
+const {
+  disableDemoEntry,
+  workbox,
+  workboxConfig = {},
+  configFileName = 'tsconfig.json',
+} = require(paths.ideConfig);
+
+
+console.log('使用 TS 配置文件名:' + configFileName);
 
 
 const workboxPluginConfig = workbox
@@ -33,7 +41,9 @@ const commontConfig = {
       {
         test: /\.tsx?$/,
         loader: require.resolve('awesome-typescript-loader'),
-
+        options: {
+          configFileName
+        },
         exclude: /node_modules/
       },
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
