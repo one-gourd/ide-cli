@@ -1,9 +1,9 @@
-const merge = require('webpack-merge');
+const {merge} = require('webpack-merge');
 const { common, workboxPluginConfig } = require('./webpack.common.js');
 const webpack = require('webpack');
 const fs = require('fs');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
-// const CleanWebpackPlugin = require('clean-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 // const path = require('path');
 const { getExternal, getAlias } = require('./webpack-helper');
@@ -38,16 +38,16 @@ const buildConfig = common.map(config => {
     ...(prodWithProxy ? { resolve: getAlias() } : {}),
 
     optimization: {
-      minimizer: [new TerserPlugin()]
+      minimizer: [new TerserPlugin()],
     },
     plugins: [
       ...workboxPluginConfig,
-      // new CleanWebpackPlugin(paths.appDist),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('production'),
         __VERSION__: JSON.stringify(version),
-        __PUBLIC_PATH__: JSON.stringify(publicPath || '')
-      })
+        __PUBLIC_PATH__: JSON.stringify(publicPath || ''),
+      }),
+      new ForkTsCheckerWebpackPlugin(),
     ],
     output: {
       filename: 'index.umd.js',
@@ -56,8 +56,8 @@ const buildConfig = common.map(config => {
       library: libName,
       path: paths.appDist,
       publicPath: publicPath || '',
-      umdNamedDefine: true
-    }
+      umdNamedDefine: true,
+    },
   });
 });
 

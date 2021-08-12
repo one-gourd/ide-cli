@@ -28,42 +28,42 @@ const workboxPluginConfig = workbox
 const commontConfig = {
   entry: Object.assign(
     {
-      index: './src/index'
+      index: './src/index',
     },
     disableDemoEntry ? {} : { demo: './demo/demo' }
   ),
-  node: {
-    fs: 'empty'
-  },
   externals: getExternal(),
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: require.resolve('awesome-typescript-loader'),
+        loader: require.resolve('ts-loader'),
         options: {
-          configFileName
+          // disable type checker - we will use it in fork plugin
+          transpileOnly: true,
+          configFile: configFileName,
+          projectReferences: true,
         },
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
       {
         enforce: 'pre',
         test: /\.js$/,
-        loader: require.resolve('source-map-loader')
+        loader: require.resolve('source-map-loader'),
       },
       {
         test: /\.css$/,
         use: [
           require.resolve('style-loader'),
-          { loader: 'css-loader', options: { importLoaders: 1 } }
-        ]
-      }
-    ]
+          { loader: 'css-loader', options: { importLoaders: 1 } },
+        ],
+      },
+    ],
   },
   resolve: Object.assign({
-    extensions: ['.tsx', '.ts', '.js']
-  })
+    extensions: ['.tsx', '.ts', '.js'],
+  }),
 };
 
 const normalConfig = Object.assign({}, commontConfig, {

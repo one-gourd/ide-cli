@@ -1,5 +1,6 @@
-const merge = require('webpack-merge');
+const {merge} = require('webpack-merge');
 const { common, workboxPluginConfig } = require('./webpack.common.js');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -34,11 +35,14 @@ module.exports = common.map(config => {
     devtool: 'inline-source-map',
     target: withElectron ? 'electron-renderer' : 'web',
     resolve: getAlias(),
+    optimization: {
+      moduleIds: 'named', // prints more readable module names in the browser console on HMR updates
+    },
     plugins: [
       ...workboxPluginConfig,
       new webpack.DefinePlugin({
         __VERSION__: JSON.stringify(version),
-        __PUBLIC_PATH__: JSON.stringify(publicPath || '')
+        __PUBLIC_PATH__: JSON.stringify(publicPath || ''),
       }),
       new HtmlWebpackPlugin(
         Object.assign(
@@ -46,14 +50,14 @@ module.exports = common.map(config => {
             title,
             // Load a custom template (lodash by default)
             template: template,
-            inject
+            inject,
           },
           disableDemoEntry ? {} : { excludeChunks: ['index', 'index.js'] }
         )
       ),
       new webpack.HotModuleReplacementPlugin(), // enable HMR globally
-      new webpack.NamedModulesPlugin() // prints more readable module names in the browser console on HMR updates
-    ]
+      new ForkTsCheckerWebpackPlugin(),
+    ],
   });
 
   console.log('resolve:', result.resolve);

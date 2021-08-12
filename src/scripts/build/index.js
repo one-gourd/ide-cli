@@ -119,9 +119,11 @@ function build(previousFileSizes) {
           warnings: []
         });
       } else {
-        messages = formatWebpackMessages(
-          stats.toJson({ all: false, warnings: true, errors: true })
-        );
+        const rawMessages = stats.toJson({ moduleTrace: false }, true);
+        messages = formatWebpackMessages({
+          errors: rawMessages.errors.map((e) => e.message),
+          warnings: rawMessages.warnings.map((e) => e.message),
+        });
       }
       if (messages.errors.length) {
         // Only keep the first error. Others are often indicative

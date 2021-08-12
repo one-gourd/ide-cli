@@ -1,7 +1,9 @@
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const { common } = require('./webpack.common.js');
 const webpack = require('webpack');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -17,26 +19,27 @@ module.exports = common.map(config => {
     mode: 'production',
     devtool: 'source-map',
     optimization: {
-      minimizer: [new TerserPlugin()]
+      minimizer: [new TerserPlugin()],
     },
     plugins: [
-      new CleanWebpackPlugin(paths.appPublic),
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: name,
         excludeChunks: ['index', 'index.js'],
         // Load a custom template (lodash by default)
-        template: 'demo/index.html'
+        template: 'demo/index.html',
       }),
       new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify('production')
-      })
+        'process.env.NODE_ENV': JSON.stringify('production'),
+      }),
+      new ForkTsCheckerWebpackPlugin(),
     ],
     output: {
       filename: 'demo.js',
       path: paths.appPublic,
       libraryTarget: 'umd',
       library: libName,
-      umdNamedDefine: true
-    }
+      umdNamedDefine: true,
+    },
   });
 });
