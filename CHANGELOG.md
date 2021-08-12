@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.18](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.2.17...v0.2.18) (2021-08-12)
+
+
+### Features
+
+* 🎸 升级依赖到最新版本, webpack & typescript ([a373780](https://github.com/alibaba-paimai-frontend/ide-cli/commit/a373780bc45db16ed30293d6d44f6588f1437442))
+
+
+### Bug Fixes
+
+* 🐛 修复 webpack5 升级后的插件和配置 ([f2413b3](https://github.com/alibaba-paimai-frontend/ide-cli/commit/f2413b31a8ff470c2d52c3f54b398956adb870f3))
+
 ### [0.2.17](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.2.16...v0.2.17) (2021-08-11)
 
 ## [0.2.16](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.2.15...v0.2.16) (2020-09-24)
