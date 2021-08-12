@@ -4,6 +4,8 @@ const paths = require('./paths');
 const { proxyLibs = [] } = require(paths.ideConfig);
 const { proxyLabPathPrefix = '../' } = require(paths.ideConfig);
 const { extraLibs = [] } = require(paths.ideConfig);
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+
 
 const COMMON_EXTERNALS = {
   ette: {
@@ -143,7 +145,9 @@ const COMMON_LIBS = Object.keys(COMMON_EXTERNALS);
 // 使用 alias 解决基础包打包的问题，方便调试时修改
 const ALIAS_LIBS = proxyLibs || [];
 // 提取 alias keys ，因为有可能是 object 元素
-const ALIAS_LIBS_KEYS = ALIAS_LIBS.map(lib => typeof lib === 'object' ? lib.name : lib)
+const ALIAS_LIBS_KEYS = ALIAS_LIBS.map(lib => typeof lib === 'object' ? lib.name : lib);
+
+const MAIN_FIELDS = ['idebug', 'browser', 'module', 'main'];
 
 module.exports = {
   COMMON_EXTERNALS,
@@ -194,7 +198,12 @@ module.exports = {
 
     return {
       alias,
-      mainFields: ['idebug', 'browser', 'module', 'main']
+      mainFields: MAIN_FIELDS,
+      plugins: [
+        new TsconfigPathsPlugin({
+          mainFields: MAIN_FIELDS,
+        }),
+      ],
     };
   }
 };

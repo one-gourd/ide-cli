@@ -56,7 +56,7 @@ module.exports = common.map(config => {
         )
       ),
       new webpack.HotModuleReplacementPlugin(), // enable HMR globally
-      new ForkTsCheckerWebpackPlugin(),
+      // new ForkTsCheckerWebpackPlugin(),
     ],
   });
 

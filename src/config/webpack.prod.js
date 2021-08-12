@@ -13,7 +13,7 @@ const {
   libName,
   publicPath,
   prodWithProxy,
-  fullPackageMode,
+  fullPackageMode = false,
   fullPackageExternals = []
 } = require(paths.ideConfig);
 const { version } = require(paths.appPackageJson);
@@ -24,6 +24,7 @@ console.log('fullPackageMode: ', fullPackageMode);
 
 let externalsConfig = getExternal(true); // 默认打包时，尽可能 externals 公共包
 
+// console.log('externals: ', externalsConfig);
 // 兼容 publicPath 是对象的形式
 
 const buildConfig = common.map(config => {
@@ -47,7 +48,7 @@ const buildConfig = common.map(config => {
         __VERSION__: JSON.stringify(version),
         __PUBLIC_PATH__: JSON.stringify(publicPath || ''),
       }),
-      new ForkTsCheckerWebpackPlugin(),
+      // new ForkTsCheckerWebpackPlugin(),
     ],
     output: {
       filename: 'index.umd.js',

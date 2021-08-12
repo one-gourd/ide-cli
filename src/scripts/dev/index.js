@@ -4,12 +4,13 @@
 // ignoring them. In the future, promise rejections that are not handled will
 // terminate the Node.js process with a non-zero exit code.
 process.on('unhandledRejection', err => {
-  throw err;
+  // throw err;
+  console.log('error occur:', err);
 });
 
-// const { debugMini, debugExtra } = require('../../lib/debug');
+// 参考官方：https://github.com/facebook/create-react-app/blob/main/packages/react-scripts/scripts/start.js
 
-// const fs = require('fs');
+const fs = require('fs');
 const chalk = require('react-dev-utils/chalk');
 const program = require('caporal');
 const webpack = require('webpack');
@@ -82,23 +83,17 @@ function devProject(args, options, logger) {
       const config = configFactory('development');
       const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
       const appName = require(paths.appPackageJson).name;
-      // const useTypeScript = fs.existsSync(paths.appTsConfig);
+      const useTypeScript = fs.existsSync(paths.appTsConfig);
+
       const urls = prepareUrls(protocol, HOST, port);
-      const devSocket = {
-        warnings: warnings =>
-          devServer.sockWrite(devServer.sockets, 'warnings', warnings),
-        errors: errors =>
-          devServer.sockWrite(devServer.sockets, 'errors', errors)
-      };
       // Create a webpack compiler that is configured with custom messages.
       const compiler = createCompiler({
         appName,
         config,
-        devSocket,
         urls,
         useYarn: false,
         useTypeScript: false,
-        webpack
+        webpack,
       });
 
       // Load proxy config
@@ -109,7 +104,9 @@ function devProject(args, options, logger) {
         proxyConfig,
         urls.lanUrlForConfig
       );
+
       const devServer = new WebpackDevServer(compiler, serverConfig);
+
       // Launch WebpackDevServer.
       devServer.listen(port, HOST, err => {
         if (err) {
