@@ -10,8 +10,10 @@
 
 const path = require('path');
 const fs = require('fs');
-const url = require('url');
 const getPublicUrlOrPath = require('react-dev-utils/getPublicUrlOrPath');
+
+const pkgFile = path.join(__dirname, '../../package.json');
+const pkgJson = require(pkgFile);
 
 // Make sure any symlinks in the project folder are resolved:
 // https://github.com/facebook/create-react-app/issues/637
@@ -60,6 +62,7 @@ const resolveModule = (resolveFn, filePath) => {
 // config after eject: we're in ./config/
 module.exports = {
   resolveApp: resolveApp,
+  cliPkgJSON: pkgJson,
   dotenv: resolveApp('.env'),
   ideConfig: resolveApp('ide.config.js'),
   appPath: resolveApp('.'),

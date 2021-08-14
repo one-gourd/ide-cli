@@ -25,7 +25,7 @@ const printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild;
 const paths = require('../../config/paths');
 const configFactory = require('../../config/webpack.config');
 
-const { applyConfig } = require('../../lib/util');
+const { applyConfig, printCLIVersion } = require('../../lib/util');
 const cliConfig = require('./config');
 
 // These sizes are pretty large. We'll warn for bundles exceeding them.
@@ -42,6 +42,8 @@ if (!checkRequiredFiles([paths.ideConfig])) {
 const config = configFactory('production');
 
 function buildProject(args, options, logger) {
+
+  printCLIVersion();
   
   // We require that you explicitly set browsers and do not fall back to
   // browserslist defaults.

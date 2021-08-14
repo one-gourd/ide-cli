@@ -2,14 +2,15 @@ const path = require('path');
 const cwd = process.cwd();
 const { debugMini, debugExtra } = require('../../lib/debug');
 const {
-    readFileOrEmpty,
-    parseOrFalse,
-    invariant,
-    escapeRegex,
-    isExistFile,
-    writeFileOrNone,
-    applyConfig,
-    isTrue
+  readFileOrEmpty,
+  parseOrFalse,
+  invariant,
+  escapeRegex,
+  isExistFile,
+  writeFileOrNone,
+  applyConfig,
+  isTrue,
+  printCLIVersion,
 } = require('../../lib/util');
 const variables = require('./_variables');
 const shell = require('shelljs');
@@ -232,6 +233,8 @@ function removeBlockOrNot(filepath, tag, shouldRemoveBlock) {
 }
 
 const actionCreate = (args, options, logger) => {
+    printCLIVersion();
+    
     debugMini(`命令行 options: ${JSON.stringify(options)}`);
 
     const targetInitDir = !!options.targetDir ? path.join(cwd, options.targetDir)  : cwd; // 如果不指定目标文件夹，则使用 cwd

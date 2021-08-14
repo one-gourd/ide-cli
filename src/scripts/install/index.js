@@ -11,7 +11,7 @@ const spawn = require('react-dev-utils/crossSpawn');
 const fs = require('fs');
 
 const Package = require('../../lib/package');
-const { applyConfig, isTrue } = require('../../lib/util');
+const { applyConfig, isTrue, printCLIVersion } = require('../../lib/util');
 const cliConfig = require('./config');
 
 const program = require('caporal');
@@ -127,7 +127,9 @@ function installWorkbox(args, options, logger) {
 function installScript(args, options, logger) {
   // 默认安装 peers 依赖
   const installerType = options.scope || 'peers';
-  
+
+  printCLIVersion();
+
   switch (installerType) {
     case 'peers':
       installPeers(args, options, logger);

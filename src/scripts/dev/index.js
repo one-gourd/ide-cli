@@ -29,7 +29,7 @@ const paths = require('../../config/paths');
 const configFactory = require('../../config/webpack.config');
 const createDevServerConfig = require('../../config/webpackDevServer.config');
 
-const { applyConfig } = require('../../lib/util');
+const { applyConfig, printCLIVersion } = require('../../lib/util');
 const cliConfig = require('./config');
 
 const isInteractive = process.stdout.isTTY;
@@ -64,6 +64,8 @@ const { checkBrowsers } = require('react-dev-utils/browsersHelper');
 function devProject(args, options, logger) {
   // 采用特殊的 port，需要调用 parseInt 将字符串转换成数字类型
   const defaultPort = parseInt(options.port || DEFAULT_PORT);
+
+  printCLIVersion();
 
   if (defaultPort !== DEFAULT_PORT) {
     console.log(`指定开发端口：${defaultPort}`);

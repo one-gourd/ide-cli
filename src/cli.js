@@ -17,8 +17,7 @@ const installScriptConfig = require('./scripts/install/config');
 const devScriptConfig = require('./scripts/dev/config');
 const buildScriptConfig = require('./scripts/build/config');
 
-const pkgFile = path.join(__dirname, '../package.json');
-const pkgJson = parseOrFalse(readFileOrEmpty(pkgFile));
+const { cliPkgJSON } = require('./config/paths');
 
 // ref: https://www.sitepoint.com/scaffolding-tool-caporal-js/
 
@@ -67,8 +66,8 @@ const spawnCommand = scriptName => {
 };
 
 program
-  .version(pkgJson.version || 'unknown')
-  .description(pkgJson.description || 'ide 命令行工具');
+  .version(cliPkgJSON.version || 'unknown')
+  .description(cliPkgJSON.description || 'ide 命令行工具');
 
 applyConfig(program, createScriptConfig).action(() => {
   spawnCommand('create');

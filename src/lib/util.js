@@ -1,5 +1,8 @@
 const fs = require('fs');
+const chalk = require('react-dev-utils/chalk');
 const { debug, debugMini, debugError, debugExtra } = require('./debug');
+const { cliPkgJSON } = require('../config/paths');
+
 
 function invariant(check, message, logger = console) {
   if (!check) {
@@ -128,7 +131,15 @@ function isExist(val) {
   return typeof val !== 'undefined' && val !== null;
 }
 
+function printCLIVersion() {
+  console.log(
+    'IDE-CLI VERISON:',
+    chalk.green(cliPkgJSON.version)
+  );
+}
+
 module.exports = {
+  printCLIVersion,
   applyConfig,
   readFileOrEmpty,
   writeFileOrNone,
