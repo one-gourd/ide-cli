@@ -2,7 +2,7 @@ const {merge} = require('webpack-merge');
 const { common, workboxPluginConfig } = require('./webpack.common.js');
 const webpack = require('webpack');
 const fs = require('fs');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+// const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const TerserPlugin = require('terser-webpack-plugin');
 // const path = require('path');

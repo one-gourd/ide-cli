@@ -12,31 +12,37 @@ const COMMON_EXTERNALS = {
     commonjs: 'ette',
     commonjs2: 'ette',
     amd: 'ette',
-    root: 'Ette'
+    root: 'Ette',
   },
   'ette-router': {
     commonjs: 'ette-router',
     commonjs2: 'ette-router',
     amd: 'ette-router',
-    root: 'etteRouter'
+    root: 'etteRouter',
   },
   'ette-proxy': {
     commonjs: 'ette-proxy',
     commonjs2: 'ette-proxy',
     amd: 'ette-proxy',
-    root: 'etteProxy'
+    root: 'etteProxy',
   },
   react: {
     commonjs: 'react',
     commonjs2: 'react',
     amd: 'react',
-    root: 'React'
+    root: 'React',
+  },
+  'react-is': {
+    commonjs: 'react-is',
+    commonjs2: 'react-is',
+    amd: 'react-is',
+    root: 'ReactIs',
   },
   'react-dom': {
     commonjs: 'react-dom',
     commonjs2: 'react-dom',
     amd: 'react-dom',
-    root: 'ReactDOM'
+    root: 'ReactDOM',
   },
   antd: 'antd',
   mobx: 'mobx',
@@ -44,50 +50,50 @@ const COMMON_EXTERNALS = {
     commonjs: 'mobx-react',
     commonjs2: 'mobx-react',
     amd: 'mobx-react',
-    root: 'mobxReact'
+    root: 'mobxReact',
   },
   'mobx-react-lite': {
     commonjs: 'mobx-react-lite',
     commonjs2: 'mobx-react-lite',
     amd: 'mobx-react-lite',
-    root: 'mobxReact'
+    root: 'mobxReact',
   },
   'mobx-state-tree': {
     commonjs: 'mobx-state-tree',
     commonjs2: 'mobx-state-tree',
     amd: 'mobx-state-tree',
-    root: 'mobxStateTree'
+    root: 'mobxStateTree',
   },
   'styled-components': {
     commonjs: 'styled-components',
     commonjs2: 'styled-components',
     amd: 'styled-components',
-    root: 'styled'
+    root: 'styled',
   },
   'ide-lib-utils': {
     commonjs: 'ide-lib-utils',
     commonjs2: 'ide-lib-utils',
     amd: 'ide-lib-utils',
-    root: 'ideLibUtils'
+    root: 'ideLibUtils',
   },
   'ide-model-utils': {
     commonjs: 'ide-model-utils',
     commonjs2: 'ide-model-utils',
     amd: 'ide-model-utils',
-    root: 'ideModelUtils'
+    root: 'ideModelUtils',
   },
   'ide-lib-base-component': {
     commonjs: 'ide-lib-base-component',
     commonjs2: 'ide-lib-base-component',
     amd: 'ide-lib-base-component',
-    root: 'ideBaseComponent'
+    root: 'ideBaseComponent',
   },
   'ide-lib-engine': {
     commonjs: 'ide-lib-engine',
     commonjs2: 'ide-lib-engine',
     amd: 'ide-lib-engine',
-    root: 'ideLibEngine'
-  }
+    root: 'ideLibEngine',
+  },
 };
 
 const extraLibArray = [].concat(extraLibs);
@@ -148,6 +154,7 @@ const ALIAS_LIBS = proxyLibs || [];
 const ALIAS_LIBS_KEYS = ALIAS_LIBS.map(lib => typeof lib === 'object' ? lib.name : lib);
 
 const MAIN_FIELDS = ['idebug', 'browser', 'module', 'main'];
+
 
 module.exports = {
   COMMON_EXTERNALS,

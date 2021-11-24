@@ -1,6 +1,6 @@
 const {merge} = require('webpack-merge');
 const { common, workboxPluginConfig } = require('./webpack.common.js');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+// const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -28,6 +28,7 @@ const {
   // 自定义插入位置：https://github.com/jantimon/html-webpack-plugin/blob/master/examples/custom-insertion-position/readme.md ，配合使用 <%= htmlWebpackPlugin.tags.bodyTags %>
   inject = true
 } = htmlPlugin;
+
 
 module.exports = common.map(config => {
   const result = merge(config, {

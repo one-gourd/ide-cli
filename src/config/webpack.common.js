@@ -1,5 +1,5 @@
 const paths = require('./paths');
-const { getExternal } = require('./webpack-helper');
+const { getExternal, defaultAlias } = require('./webpack-helper');
 const { InjectManifest } = require('workbox-webpack-plugin');
 
 const {
@@ -62,6 +62,12 @@ const commontConfig = {
     ],
   },
   resolve: Object.assign({
+    // 兼容 webpack 5 中的 node.js polyfill
+    // https://webpack.js.org/configuration/resolve/#resolvefallback
+    fallback: {
+      path: require.resolve('path-browserify'),
+      process: require.resolve('process/browser'),
+    },
     extensions: ['.tsx', '.ts', '.js'],
   }),
 };
