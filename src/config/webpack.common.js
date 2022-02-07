@@ -43,6 +43,7 @@ const commontConfig = {
           transpileOnly: false,
           configFile: configFileName,
           projectReferences: true,
+          ignoreDiagnostics: [6059]
         },
         exclude: /node_modules/,
       },

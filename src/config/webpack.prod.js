@@ -2,6 +2,8 @@ const {merge} = require('webpack-merge');
 const { common, workboxPluginConfig } = require('./webpack.common.js');
 const webpack = require('webpack');
 const fs = require('fs');
+const BundleAnalyzerPlugin =
+  require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 // const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const TerserPlugin = require('terser-webpack-plugin');
@@ -13,6 +15,8 @@ const {
   libName,
   publicPath,
   prodWithProxy,
+  analyze,
+  enableSourceMap = false,
   fullPackageMode = false,
   fullPackageExternals = []
 } = require(paths.ideConfig);
@@ -35,7 +39,7 @@ const buildConfig = common.map(config => {
     entry: './src/index',
     externals: externalsConfig,
     mode: 'production',
-    devtool: 'source-map',
+    ...(enableSourceMap ? { devtool: 'source-map' } : {}),
     ...(prodWithProxy ? { resolve: getAlias() } : {}),
 
     optimization: {
@@ -48,6 +52,7 @@ const buildConfig = common.map(config => {
         __VERSION__: JSON.stringify(version),
         __PUBLIC_PATH__: JSON.stringify(publicPath || ''),
       }),
+      ...(analyze ? [new BundleAnalyzerPlugin()] : []),
       // new ForkTsCheckerWebpackPlugin(),
     ],
     output: {
