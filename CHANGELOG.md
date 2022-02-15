@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.3](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.3.1...v0.3.3) (2022-02-15)
+
+
+### Features
+
+* 🎸 新增选项: 新增 analysis 和 source-map ([bd98278](https://github.com/alibaba-paimai-frontend/ide-cli/commit/bd982781d31cc0134196d4d960390e035b7b5c99))
+* 🎸 优化部分配置 ([dd0a5e7](https://github.com/alibaba-paimai-frontend/ide-cli/commit/dd0a5e717ec6af14e780f399a3f8400d916f7242))
+
 ### [0.3.1](https://github.com/alibaba-paimai-frontend/ide-cli/compare/v0.2.18...v0.3.1) (2021-08-14)
 
 
