@@ -56,7 +56,7 @@ const COMMON_EXTERNALS = {
     commonjs: 'mobx-react-lite',
     commonjs2: 'mobx-react-lite',
     amd: 'mobx-react-lite',
-    root: 'mobxReact',
+    root: 'mobxReactLite',
   },
   'mobx-state-tree': {
     commonjs: 'mobx-state-tree',
