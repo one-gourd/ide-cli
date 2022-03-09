@@ -4,6 +4,7 @@ const { InjectManifest } = require('workbox-webpack-plugin');
 
 const {
   disableDemoEntry,
+  lessRule = false,
   workbox,
   workboxConfig = {},
   configFileName = 'tsconfig.json',
@@ -11,6 +12,22 @@ const {
 
 
 console.log('使用 TS 配置文件名:' + configFileName);
+
+const defaultLessRule = {
+    test: /\.less$/,
+    use: [{
+        loader: "style-loader" // creates style nodes from JS strings
+    }, {
+        loader: "css-loader" // translates CSS into CommonJS
+    }, {
+        loader: "less-loader" // compiles Less to CSS
+    }]
+};
+
+let curLessRule = null;
+if(!!lessRule) {
+  curLessRule = typeof lessRule === 'boolean' ? defaultLessRule : lessRule;
+}
 
 
 const workboxPluginConfig = workbox
@@ -43,7 +60,7 @@ const commontConfig = {
           transpileOnly: false,
           configFile: configFileName,
           projectReferences: true,
-          ignoreDiagnostics: [6059]
+          ignoreDiagnostics: [6059],
         },
         exclude: /node_modules/,
       },
@@ -60,7 +77,7 @@ const commontConfig = {
           { loader: 'css-loader', options: { importLoaders: 1 } },
         ],
       },
-    ],
+    ].concat(curLessRule ? [curLessRule] : []),
   },
   resolve: Object.assign({
     // 兼容 webpack 5 中的 node.js polyfill
