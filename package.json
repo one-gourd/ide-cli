@@ -1,6 +1,6 @@
 {
   "name": "ide-component-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "ide 命令行工具集",
   "main": "src/index.js",
   "bin": {
@@ -29,6 +29,7 @@
     "less-loader": "^10.2.0",
     "minimist": "^1.2.5",
     "path-browserify": "^1.0.1",
+    "process": "^0.11.10",
     "prompt": "^1.1.0",
     "react-dev-utils": "^11.0.4",
     "renamer": "^3.2.1",
