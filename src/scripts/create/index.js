@@ -101,7 +101,7 @@ function replaceFiles(targetDirection, configs, logger) {
 
     console.log(`\n>>> STEP 1: 重命名文件(夹) <<<`);
     // replace folder or file name
-    ['name', 'className', 'version'].forEach(variable => {
+    ['name', 'className', 'version', 'fnName'].forEach(variable => {
         shell.exec(
             `${path.join(
                 __dirname,

@@ -26,6 +26,12 @@ module.exports = [
   'className',
 
   /**
+   * fnName, 导出的函数名
+   * 必填项
+   */
+  'fnName',
+
+  /**
    * store id 前缀
    * 必填项
    */
@@ -72,5 +78,5 @@ module.exports = [
   /**
    * webpack extra externals，会和上述的 peer 配置进行合并
    */
-  'externals'
+  'externals',
 ];
