@@ -10,15 +10,19 @@ const {
   writeFileOrNone,
   applyConfig,
   isTrue,
-  printCLIVersion,
 } = require('../../lib/util');
+const { printCLIVersion } = require('../../lib/infomations');
 const variables = require('./_variables');
 const shell = require('shelljs');
-const { cloneRepo } = require('./cloneRepo');
+const { cloneRepo } = require('../../lib/cloneRepo');
 
 const cliConfig = require('./config');
 
 const program = require('caporal');
+
+const TPL_REPO_URL =
+  'https://github.com/one-gourd/ide-tpl-component-neatly.git';
+
 
 /**
  * 根据配置项，获取替换字符串
@@ -273,7 +277,7 @@ const actionCreate = (args, options, logger) => {
         // 克隆到目标文件夹
         cloneRepo(targetDirection, () => {
             replaceFiles(targetDirection, configs, logger);
-        }, configs.templater);
+        }, configs.templater || TPL_REPO_URL);
     }
 };
 

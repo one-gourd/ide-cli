@@ -29,7 +29,8 @@ const paths = require('../../config/paths');
 const configFactory = require('../../config/webpack.config');
 const createDevServerConfig = require('../../config/webpackDevServer.config');
 
-const { applyConfig, printCLIVersion } = require('../../lib/util');
+const { applyConfig } = require('../../lib/util');
+const { printCLIVersion } = require('../../lib/infomations');
 const cliConfig = require('./config');
 
 const isInteractive = process.stdout.isTTY;
