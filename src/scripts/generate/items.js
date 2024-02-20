@@ -18,14 +18,14 @@ exports.getItems = (configs)=>{
     }
     return [
       {
-        option: 'Angular Ngrx Store',
+        option: 'IDE TPL',
         defaultCase: '(pascalCase)',
         entry: {
           folderPath: configs.tplDir,
         },
         dynamicReplacers: dynamicReplacers,
         output: {
-          path: `${configs.targetDir}/__name__(kebabCase)`,
+          path: `${configs.targetDir}/__name__(noCase)`,
           pathAndFileNameDefaultCase: '(kebabCase)',
           overwrite: configs.overwrite,
         },
