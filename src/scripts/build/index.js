@@ -25,7 +25,7 @@ const printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild;
 const paths = require('../../config/paths');
 const configFactory = require('../../config/webpack.config');
 
-const { applyConfig, printCLIVersion } = require('../../lib/util');
+const { applyConfig, printCLIVersion } = require('../../lib/infomations');
 const cliConfig = require('./config');
 
 // These sizes are pretty large. We'll warn for bundles exceeding them.

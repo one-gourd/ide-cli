@@ -13,6 +13,7 @@ const spawn = require('react-dev-utils/crossSpawn');
 const path = require('path');
 const { readFileOrEmpty, parseOrFalse, applyConfig } = require('./lib/util');
 const createScriptConfig = require('./scripts/create/config');
+const generateScriptConfig = require('./scripts/generate/config');
 const installScriptConfig = require('./scripts/install/config');
 const devScriptConfig = require('./scripts/dev/config');
 const buildScriptConfig = require('./scripts/build/config');
@@ -21,7 +22,7 @@ const { cliPkgJSON } = require('./config/paths');
 
 // ref: https://www.sitepoint.com/scaffolding-tool-caporal-js/
 
-const CMD_LIST = ['create', 'install', 'build', 'dev'];
+const CMD_LIST = ['create', 'install', 'generate', 'build', 'dev'];
 
 const spawnCommand = scriptName => {
   // 获取参数
@@ -71,6 +72,10 @@ program
 
 applyConfig(program, createScriptConfig).action(() => {
   spawnCommand('create');
+});
+
+applyConfig(program, generateScriptConfig).action(() => {
+  spawnCommand('generate');
 });
 
 applyConfig(program, installScriptConfig).action(() => {

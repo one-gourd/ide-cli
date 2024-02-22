@@ -11,6 +11,7 @@
 const path = require('path');
 const fs = require('fs');
 const getPublicUrlOrPath = require('react-dev-utils/getPublicUrlOrPath');
+const { readFileOrEmpty } = require('../lib/util');
 
 const pkgFile = path.join(__dirname, '../../package.json');
 const pkgJson = require(pkgFile);
@@ -19,6 +20,10 @@ const pkgJson = require(pkgFile);
 // https://github.com/facebook/create-react-app/issues/637
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
+const appPackageJson = resolveApp('package.json');
+
+const appPackageJsonContent = readFileOrEmpty(appPackageJson);
+
 
 // We use `PUBLIC_URL` environment variable or "homepage" field to infer
 // "public path" at which the app is served.
@@ -28,7 +33,7 @@ const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 // like /todos/42/static/js/bundle.7289d.js. We have to know the root.
 const publicUrlOrPath = getPublicUrlOrPath(
   process.env.NODE_ENV === 'development',
-  require(resolveApp('package.json')).homepage,
+  appPackageJsonContent ? appPackageJsonContent.homepage : '',
   process.env.PUBLIC_URL
 );
 
@@ -70,7 +75,7 @@ module.exports = {
   appPublic: resolveApp('public'),
   appHtml: resolveApp('public/index.html'),
   appIndexJs: resolveModule(resolveApp, 'src/index'),
-  appPackageJson: resolveApp('package.json'),
+  appPackageJson: appPackageJson,
   appSrc: resolveApp('src'),
   appTsConfig: resolveApp('tsconfig.json'),
   appJsConfig: resolveApp('jsconfig.json'),

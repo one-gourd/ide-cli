@@ -11,7 +11,9 @@ const spawn = require('react-dev-utils/crossSpawn');
 const fs = require('fs');
 
 const Package = require('../../lib/package');
-const { applyConfig, isTrue, printCLIVersion } = require('../../lib/util');
+const { applyConfig, isTrue } = require('../../lib/util');
+const { printCLIVersion } = require('../../lib/infomations');
+
 const cliConfig = require('./config');
 
 const program = require('caporal');
